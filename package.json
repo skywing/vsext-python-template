@@ -10,16 +10,40 @@
 		"Other"
 	],
 	"activationEvents": [
-        "onCommand:pytemplate.helloWorld"
+		"onCommand:pytemplate.activatePyTemplate",
+        "onCommand:pytemplate.createProject"
 	],
 	"main": "./out/extension.js",
 	"contributes": {
+		"configuration": {
+			"projecteTemplate.templateDirectory": {
+				"type": [
+					"string",
+					"null"
+				],
+				"description": "Directory to read/store project template folders"
+			}
+		},
 		"commands": [
 			{
-				"command": "pytemplate.helloWorld",
-				"title": "Hello World"
+				"command": "pytemplate.activatePyTemplate",
+				"title": "Acivate PyTemplate",
+				"category": "PyTemplate"
+			},
+			{
+				"command": "pytemplate.createProject",
+				"title": "Create Python Project",
+				"category": "PyTemplate"
 			}
-		]
+		],
+		"menus": {
+			"commandPalette": [
+				{
+					"command": "pytemplate.createProject",
+					"when": "workspaceFolderCount == 1 && pyTemplate.activated == true"
+				}
+			]
+		}
 	},
 	"scripts": {
 		"vscode:prepublish": "npm run compile",
